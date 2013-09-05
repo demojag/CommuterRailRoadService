@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuterRailRoadService.Core", "CommuterRailRoadService.Core\CommuterRailRoadService.Core.csproj", "{AB0BA758-24EB-4018-A2D4-E0225879A707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuterRailRoadService.Core.Test", "CommuterRailRoadService.Core.Test\CommuterRailRoadService.Core.Test.csproj", "{78308E69-9E0A-4263-B094-D794D751D2DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB0BA758-24EB-4018-A2D4-E0225879A707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0BA758-24EB-4018-A2D4-E0225879A707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0BA758-24EB-4018-A2D4-E0225879A707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0BA758-24EB-4018-A2D4-E0225879A707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78308E69-9E0A-4263-B094-D794D751D2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78308E69-9E0A-4263-B094-D794D751D2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78308E69-9E0A-4263-B094-D794D751D2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78308E69-9E0A-4263-B094-D794D751D2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

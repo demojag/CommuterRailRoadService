@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace CommuterRailRoadService.Core.Test
@@ -36,9 +30,26 @@ namespace CommuterRailRoadService.Core.Test
         [Test]
         public void FindPathWithMaximumStops()
         {
-            var result = _map.GetPathWithMaximumStops("C", 3);
-
+            var result = _map.GetPathWithMaximumStops("C","C", 3, false);
+            Assert.AreEqual(2, result);
         }
+
+        [Test]
+        public void FindPathWithExactStops()
+        {
+            var result = _map.GetPathWithMaximumStops("A", "C", 4, true);
+            Assert.AreEqual(3, result);
+        }
+
+        [Test]
+        [TestCase("A","C", 9)]
+        [TestCase("B","B", 9)]
+        public void FindShortestPath(String source, String dest, Int32 expected)
+        {
+            var result = _map.GetShortestPath(source,dest);
+            Assert.AreEqual(expected, result);
+        }
+
     }
 
 }

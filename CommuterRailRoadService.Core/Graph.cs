@@ -62,19 +62,80 @@ namespace CommuterRailRoadService.Core
             return total.ToString(CultureInfo.InvariantCulture);
         }
 
-        public String GetPathWithMaximumStops(String source, Int32 stops)
+        public Int32 GetPathWithMaximumStops(String source, String destination, Int32 stops, Boolean exactStops)
         {
-            var stopsLeft = stops - 1;
-            string result = string.Empty;
-            var node = Nodes.Single(n => n.Source == source);
+
+            int pathFound = 0;
+
+
+            pathFound = InternalPathFinder(source, destination, stops, ref pathFound, exactStops);
+
+            return pathFound;
+        }
+
+        public Int32 GetShortestPath(String source, String destination)
+        {
+
+            int lenght = 0;
+            List<Int32> pathFounds = new List<int>();
+            InternalPathFinderCount(source, String.Empty, destination, ref lenght, ref pathFounds);
+
+            return pathFounds.Min();
+        }
+
+        private void InternalPathFinderCount(string source, string prev, string destination, ref int lenght, ref List<int> minimumFound)
+        {
+            Node node = Nodes.Single(n => n.Source == source);
 
             foreach (var conn in node.Connections)
             {
-                if (stopsLeft == 0) break;
-                result = node.Source + "-" + GetPathWithMaximumStops(conn.Destination.Source, stopsLeft);
+
+                if (conn.Destination.Source != prev)
+                {
+                    lenght += conn.Weight;
+                    if (conn.Destination.Source == destination)
+                    {
+                        minimumFound.Add(lenght);
+                        lenght -= conn.Weight;
+                        break;
+                    }
+                    InternalPathFinderCount(conn.Destination.Source, node.Source, destination, ref lenght, ref minimumFound);
+                    lenght -= conn.Weight;
+                }
             }
 
-            return result;
         }
+
+        private int InternalPathFinder(string source, string destination, int stops, ref int pathFound, bool exactStops)
+        {
+            Node node = Nodes.Single(n => n.Source == source);
+
+            if (stops != 0)
+            {
+                stops--;
+                foreach (var conn in node.Connections)
+                {
+                    if (exactStops) pathFound += CheckExactStopsDestination(destination, stops, conn);
+                    else pathFound += CheckStopsDestination(destination, conn);
+                    InternalPathFinder(conn.Destination.Source, destination, stops, ref pathFound, exactStops);
+                }
+            }
+            return pathFound;
+        }
+
+        private static Int32 CheckStopsDestination(string destination, Edge conn)
+        {
+            return conn.Destination.Source == destination ? 1 : 0;
+        }
+
+        private static Int32 CheckExactStopsDestination(string destination, int stops, Edge conn)
+        {
+            if (conn.Destination.Source == destination && stops == 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
     }
 }

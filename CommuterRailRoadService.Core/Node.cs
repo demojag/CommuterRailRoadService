@@ -7,6 +7,7 @@ namespace CommuterRailRoadService.Core
     {
         private readonly String _station;
         private readonly List<Edge> _connections;
+        public Boolean Visited = false;
 
         public Node(String source, List<Edge> conn)
         {
